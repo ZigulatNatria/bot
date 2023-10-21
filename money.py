@@ -1,5 +1,6 @@
 import json
 import requests
+from config import api
 
 
 class ConvertionException(Exception): # Класс исключений (ошибок)
@@ -10,10 +11,9 @@ class Converter:   # Основной класс
     @staticmethod
     def get_price():
 
-        r = requests.get('https://free.currconv.com/api/v7/convert?q=USD_RUB,RUB_USD&compact=ultra&apiKey=648d49b34a55105e76fb')
+        r = requests.get(api)    # Забираем данные с ресурса
         rq = json.loads(r.content) # Преобразуем ответ в JSON
 
-        return rq['USD_RUB']
-        # return print(rq)
+        return rq['USD_RUB']      # Возвращаем только цену в рублях за доллар
 
 Converter.get_price()
